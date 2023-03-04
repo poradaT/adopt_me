@@ -15,7 +15,7 @@ def sql_select(query):
     return results
 
 def sql_select_one(query, params):
-    db_connection = psycopg2.connect("dbname=food_truck")
+    db_connection = psycopg2.connect("dbname=pet_adoption")
     db_cursor = db_connection.cursor()
 
     db_cursor.execute(query, params)    
@@ -27,7 +27,7 @@ def sql_select_one(query, params):
     return result
 
 def sql_write(query, params):
-    db_connection = psycopg2.connect("dbname=food_truck")
+    db_connection = psycopg2.connect("dbname=pet_adoption")
     db_cursor = db_connection.cursor()
         
     db_cursor.execute(

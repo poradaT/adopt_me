@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{%block title%}
+    login
+{%endblock title%}
+
+{%block login%}
+{% if session.get('user_name')%}
+<button><a href="/login">Log in</a></button>
+{% endif %}
+{%endblock login%}
+
+{%block main %}
+
+<p>
+    <h2>Log in</h2>
+    {% with messages = get_flashed_messages() %}
+    <p style="font-weight: bold;">{{ messages[0] }}</p>
+    {% endwith %}
+
+
+    <form action="/login" method ="POST">
+        <input type="hidden" name="id" value="{{ id }}">
+
+        <label for="email">Enter your email:</label> 
+        <input name="email" type="text"></input> </br></br>
+
+        <label for="password">Password:</label>
+        <input name="password" type="password"></input> </br></br>
+
+        <button type="submit">Login</button>
+    </form>
+</p>
+
+{% endblock main %}
