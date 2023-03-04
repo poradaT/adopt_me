@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    User list
+{% endblock title%}
+
+{% block main %}  
+
+<p>
+    <h2>User List </h2>
+    <P>
+    <button><a href="/add_user">Add new user</a></button>       
+    </P>   
+</p>
+
+
+<table>
+    <thred>    
+
+        <th>
+            Update
+        </th>     
+        <th>
+            User ID
+        </th>
+        <th>
+            Name
+        </th>
+        <th>
+            Email address
+        </th>
+        <th>
+            Admin
+        </th>
+    </thred>
+
+    <tbody>
+        {% for user in users %}
+        <tr>
+
+            <td>
+                <button> <a href="/edit_user?id={{ user.id }}&email={{ user.email }}"> Edit </a> </button> </br> </br>
+                <button> <a href="/delete_user?id={{ user.id }}&email={{ user.email }}"> Del </a> </button>
+            </td>
+
+            <td>{{ user.id }}</td>
+            <td>{{ user.name }}</td>
+            <td>{{ user.email }}</td>
+            {% if user.admin %}
+            <td> Yes ✔️ </td>
+            {% else %}
+            <td> No ❌</td>
+            {% endif %}
+        </tr>
+        {% endfor %}
+    </tbody>
+
+</table>
+    
+{% endblock main %}

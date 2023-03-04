@@ -1,0 +1,35 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Add New User
+{% endblock title%}
+
+{% block main %}
+<h2>Add New User</h2>
+
+{% with messages = get_flashed_messages() %}
+<p style="font-weight: bold;">{{ messages[0] }}</p>
+{% endwith %}
+
+<form action="/user_list" method="post">
+    <p>
+        <label>Name:</label>
+        <input name="name" type="text"></input>
+    </p>
+    <p>
+        <label>Email:</label>
+        <input name="email" type="text"></input>
+    </p>
+    <p>
+        <label>Password</label> </br>
+        <input name="password" type="password"></input>
+    </p>
+    <p>
+        <label for="confirm_password">Confirm your password</label> </br>
+        <input name="confirm_password" type="password"></input>
+    </p>
+
+    <button type="submit"> Add User</button>
+</form>
+
+{% endblock main %}

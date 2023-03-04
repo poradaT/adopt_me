@@ -13,22 +13,6 @@
 {% endif %} 
 </h2>
 
-<!-- <p>Sort by: <button><a href="/?price=desc">most expensive item</a></button>
-<button><a href="/?price=asc">cheapest item</a></button></p>
-</p> -->
-
-<!-- <p>
-    <form method="get">
-    <label for="sort_by" class="sort">Sort by:</label>
-      <select name="price" onchange="this.form.submit()">
-        <option value="">Select an option</option>
-        <option value="desc" {% if price == 'desc' %}selected{% endif %}>Most expensive item</option>
-        <option value="asc" {% if price == 'asc' %}selected{% endif %}>Cheapest item</option>
-        <option value="name" {% if price == 'name' %}selected{% endif %}>Item name</option>
-      </select>
-    </form>
-</p> -->
-
 <table>
     <thred>
         {% if session.get('user_name') %}

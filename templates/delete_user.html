@@ -1,0 +1,15 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete User
+{% endblock title%}
+
+{% block main %}  
+<h2> Are you sure you want to delete "{{ user[1] }}" ?</h2>
+    
+<form action="/delete_user" method="post">
+    <input type="hidden" name="id" value="{{ id }}">
+    <button type = "submit"> Delete </button>
+</form>
+    
+{% endblock main %}

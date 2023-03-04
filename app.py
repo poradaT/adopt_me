@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
 from models.pet import get_all_pets, insert_pet, get_pet, update_pet, delete_pet
-from models.user import get_user, insert_user #get_all_users, update_user, delete_user
+from models.user import get_user, insert_user, get_all_users, update_user, delete_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -117,3 +117,75 @@ def logout_user():
     session.pop('user_email')
 
     return redirect('/login')
+
+#######################################################################
+
+@app.route('/user_list', methods=['GET', 'POST'])
+def users():
+    if request.method == 'GET':
+        users = get_all_users()
+        return render_template('users.html', users=users, user_name = session.get('user_name', 'UNKNOWN'))
+
+    name = request.form.get('name')
+    email = request.form.get('email')
+    password = request.form.get('password')
+    password_hash = generate_password_hash(password)
+    confirm_password = request.form.get('confirm_password')
+
+    if password != confirm_password:
+        flash('Passwords do not match! Please try again.', 'error')
+        return render_template('new_user.html')
+   
+    insert_user(name, email, password_hash)
+    users = get_all_users()
+    return render_template('users.html', users=users, user_name = session.get('user_name', 'UNKNOWN'))
+
+@app.route('/add_user')
+def add_user():
+    return render_template("new_user.html", user_name = session.get('user_name', 'UNKNOWN'))
+
+@app.route('/edit_user', methods=['GET', 'POST'])
+def edit_user():
+
+    id = request.args.get('id')
+    email = request.args.get('email')
+    user_prefilled = get_user(email)
+
+    if request.method == 'GET':    
+        return render_template("edit_user.html", id=id, user_prefilled=user_prefilled, user_name = session.get('user_name', 'UNKNOWN'))
+
+    password = request.form.get('password')
+    confirm_password = request.form.get('confirm_password')
+
+    if password != confirm_password:
+        id = request.form['id']
+        email = request.form["email"]
+        user_prefilled = get_user(email)
+        flash('Passwords do not match! Please try again.', 'error')
+        return render_template("edit_user.html", id=id, email=email, user_prefilled=user_prefilled, user_name = session.get('user_name', 'UNKNOWN'))
+
+    update_user(
+        request.form['id'],
+        request.form['name'], 
+        request.form["email"],
+        request.form['password']
+    )
+    return redirect('/user_list')
+
+@app.route('/delete_user', methods=['GET', 'POST'])
+def del_user():
+    if request.method == 'GET':
+        id = request.args.get('id')
+        email = request.args.get('email')
+        user = get_user(email)
+        return render_template("delete_user.html", id=id, email=email, user=user, user_name = session.get('user_name', 'UNKNOWN'))
+
+    id = request.form['id']
+    delete_user(id)
+    return redirect('/user_list')
+
+#######################################################################
+
+@app.route('/contact')
+def contact_us():
+    return render_template("contact.html", user_name = session.get('user_name', 'UNKNOWN'))
