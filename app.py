@@ -1,9 +1,6 @@
 from flask import Flask, render_template, request, redirect, session, flash
-from models.pet import get_all_pets
-
-# insert_pet, get_pet, update_pet, delete_pet
-from models.user import get_user, insert_user
-#get_all_users, update_user, delete_user
+from models.pet import get_all_pets, insert_pet, get_pet, update_pet, delete_pet
+from models.user import get_user, insert_user #get_all_users, update_user, delete_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -16,6 +13,56 @@ if __name__ == "__main__":
 def index():
     pet_list = get_all_pets()
     return render_template('pet.html', pet_list=pet_list, user_name = session.get('user_name', 'UNKNOWN'), user_status = session.get('user_status'))
+
+@app.route('/create')
+def add_pet():
+    return render_template("new_pet.html", user_name = session.get('user_name', 'UNKNOWN'))
+
+@app.post('/pet_list')
+def create_new_pet():
+    insert_pet(
+        request.form['image_url'],
+        request.form['name'], 
+        request.form['type'],
+        request.form['breed'],
+        request.form['sex'],
+        request.form['size'],
+        request.form['colour'],
+        request.form['age']      
+    )
+    return redirect('/')
+
+@app.route('/edit_pet', methods=['GET', 'POST'])
+def edit_pet():
+    if request.method == 'GET':
+        id = request.args.get('id')
+        item_prefilled = get_pet(id)
+        return render_template("edit_pet.html", id=id, item_prefilled=item_prefilled, user_name = session.get('user_name', 'UNKNOWN'))
+
+    id = request.form['id']
+    update_pet(
+        request.form['id'],
+        request.form['image_url'],
+        request.form['name'], 
+        request.form['type'],
+        request.form['breed'],
+        request.form['sex'],
+        request.form['size'],
+        request.form['colour'],
+        request.form['age'] 
+    )
+    return redirect('/')
+
+@app.route('/delete_pet', methods=['GET', 'POST'])
+def del_pet():
+    if request.method == 'GET':
+        id = request.args.get('id')
+        item_details = get_pet(id)    
+        return render_template("delete_pet.html", id=id, item_details=item_details, user_name = session.get('user_name', 'UNKNOWN'))
+
+    id = request.form['id']
+    delete_pet(id)
+    return redirect('/')
 
 #######################################################################
 

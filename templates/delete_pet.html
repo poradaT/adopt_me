@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Delete Pet
+{% endblock title%}
+
+{% block main %}  
+{% for item in item_details %}
+    <h2> Are you sure you want to delete "{{ item.name }}" ?</h2>
+    {% endfor %}
+<form action="/delete_pet" method="post">
+    <input type="hidden" name="id" value="{{ id }}">
+    <button type = "submit"> Delete </button>
+</form>
+    
+
+{% endblock main %}

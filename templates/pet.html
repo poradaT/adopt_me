@@ -32,9 +32,6 @@
 <table>
     <thred>
         {% if session.get('user_name') %}
-        <!-- <th>
-            Delete
-        </th> -->
         <th>
             Update
         </th>
@@ -69,15 +66,11 @@
         {% for item in pet_list %}
             <tr>
                 {% if session.get('user_name') %}
-                <!-- <td> 
-                    <button> <a href="/delete_food?id={{ item.id }}"> Del </a> </button>
-                </td> -->
                 <td>
-                    <button> <a href="#"> Edit </a> </button> </br></br>
-                    <button> <a href="#"> Del </a> </button>
+                    <button> <a href="/edit_pet?id={{ item.id }}"> Edit </a> </button> </br></br>
+                    <button> <a href="/delete_pet?id={{ item.id }}"> Del </a> </button>
                 </td>
                 {% endif %}
-                <!-- <td>{{ item.id }}</td> -->
                 <td>
                     <img style="height: 180px" src="{{ item.image_url }}" alt={{item.name}}>
                 </td>

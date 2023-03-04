@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create New Pet
+{% endblock title%}
+
+{% block main %}
+<h2>Create New Pet</h2>
+<form action="/pet_list" method="post">
+    <p>
+        <label>Image URL</label> <br>
+        <textarea name="image_url" type="text" row="4" cols="50" type="text"></textarea>
+    </p>
+    <p>
+        <label>Name:</label>
+        <input name="name" type="text"></input>
+    </p>
+    <p>
+        <label for="type" class="sort">Type:</label>
+        <select name="type">
+        <option value="">Select an option</option>
+        <option value="dog">Dog</option>
+        <option value="cat">Cat</option>
+        </select>
+    </p>
+    <p>
+        <label>Breed:</label>
+        <input name="breed" type="text"></input>
+    </p>
+    <p>
+        <label>Sex:</label>
+        <input name="sex" type="text"></input>
+    </p>
+    <p>
+        <label>size:</label>
+        <input name="size" type="text"></input>
+    </p>
+    <p>
+        <label>Colour:</label>
+        <input name="colour" type="text"></input>
+    </p>
+    <p>
+        <label>Age:</label>
+        <input name="age" type="text"></input>
+    </p>
+
+    <button type="submit"> Create Pet</button>
+</form>
+
+{% endblock main %}
