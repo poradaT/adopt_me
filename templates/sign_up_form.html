@@ -1,0 +1,43 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Sign Up
+{% endblock title%}
+
+{%block signup%}
+{% if session.get('user_name')%}
+<button><a href="/signup">Sign Up</a></button>
+{% endif %}
+{%endblock signup%}
+
+{% block main %}
+<h2>Sign Up</h2>
+
+{% with messages = get_flashed_messages() %}
+<p style="font-weight: bold;">{{ messages[0] }}</p>
+{% endwith %}
+
+<form action="/signup" method="post">
+    
+    <p>
+        <label for="name">Name:</label>
+        <input name="name" type="text"></input>
+    </p>
+    <p>
+        <label for="email">Email:</label>
+        <input name="email" type="text"></input>
+    </p>
+    <p>
+        <label for="password">Password</label></br>
+        <input name="password" type="password"></input>
+    </p>
+    
+    <p>
+        <label for="confirm_password">Confirm your password</label></br>
+        <input name="confirm_password" type="password"></input>
+    </p>
+
+    <button type="submit"> Sign Up</button>
+</form>
+
+{% endblock main %}

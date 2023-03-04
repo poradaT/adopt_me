@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adopt Me</title>
+    <link rel="stylesheet" href="/static/styles.css">
+</head>
+<body>
+    <header>
+        <h1>Adopt Me</h1>
+            <form action="/logout" method="post">              
+            {% if session.get('user_name') %}
+            <span>Logged in as: {{user_name}}</span>
+            <button type="submit">Logout</button> 
+            {% else %} 
+            <span>Welcome Guest</span>  
+                {%block login%}                   
+                <button><a href="/login">Log In</a></button>                  
+                {%endblock login%}
+                {%block signup%} 
+                <button><a href="/signup">Sign Up</a></button>
+                {%endblock signup%} 
+            {% endif %}
+        </form>
+    </header> 
+    <nav>
+        <a href="/">Home</a>
+        <a href="/contact">Contact Us</a>
+        {% if session.get('user_name') and session.get('user_status') %}
+        <a href="#">Adoptor List</a>
+        {% endif %}
+    </nav>
+    <main>
+        {% block main %} {% endblock main %}
+    </main>  
+</body>
+</html>
