@@ -9,8 +9,8 @@
 {% for item in pet_details %} 
 <h2>{{ item.name }}
 {% if session.get('user_name') %}
-    <button><a href="/edit_pet?id={{ item.id }}" class="btn btn-sm btn-outline-primary mr-2">Edit</a></button>
-    <button><a href="/delete_pet?id={{ item.id }}" class="btn btn-sm btn-outline-danger">Delete</a></button>    
+    <button><a href="/edit_pet?id={{ item.id }}">Edit</a></button>
+    <button><a href="/delete_pet?id={{ item.id }}">Delete</a></button>    
 {% endif %}
 </h2>
 
@@ -22,7 +22,7 @@
         <tbody>
             <tr>
                 <th scope="row">Name</th>
-                <td>{{ item.name }}</td>
+                <td style="width: 400px">{{ item.name }}</td>
             </tr>
             <tr>
                 <th scope="row">Type</th>
@@ -50,8 +50,27 @@
             </tr>
         </tbody>
     </table>
+</div> 
+
+<div class="social-media">
+    Share:
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://127.0.0.1:5000/pet_details?id={{ item.id }}" target="_blank">
+        <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Facebook2_colored_svg-1024.png" alt="facebook">
+    </a>
+
+    <a href="https://twitter.com/intent/tweet?url=http://127.0.0.1:5000/pet_details?id={{ item.id }}" target="_blank">
+        <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Twitter_colored_svg-1024.png" alt="twitter">
+    </a>
+
+    <a href="https://api.whatsapp.com/send?text=http://127.0.0.1:5000/pet_details?id={{ item.id }}" target="_blank">
+        <img src="https://cdn2.iconfinder.com/data/icons/social-media-2285/512/1_Whatsapp2_colored_svg-1024.png" alt="whatsapp">
+    </a>
+</div>
+
+{% if session.get('user_name') %}
+<h2><button style="font-size:large">Adopt {{ item.name }}</button></h2> 
+{% endif %}
 
 {% endfor %}
-</div>
 
 {% endblock main %}
