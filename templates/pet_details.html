@@ -1,0 +1,57 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Pet Details
+{% endblock title%}
+
+{% block main %}
+
+{% for item in pet_details %} 
+<h2>{{ item.name }}
+{% if session.get('user_name') %}
+    <button><a href="/edit_pet?id={{ item.id }}" class="btn btn-sm btn-outline-primary mr-2">Edit</a></button>
+    <button><a href="/delete_pet?id={{ item.id }}" class="btn btn-sm btn-outline-danger">Delete</a></button>    
+{% endif %}
+</h2>
+
+<div class="details">
+
+    <img style="height: 300px" src="{{ item.image_url }}" alt="{{ item.name }}">
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th scope="row">Name</th>
+                <td>{{ item.name }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Type</th>
+                <td>{{ item.type }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Breed</th>
+                <td>{{ item.breed }}</td>
+            </tr>
+                <tr>
+                <th scope="row">Sex</th>
+                <td>{{ item.sex }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Size</th>
+                <td>{{ item.size }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Colour</th>
+                <td>{{ item.colour }}</td>
+            </tr>
+            <tr>
+                <th scope="row">Age</th>
+                <td>{{ item.age }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endfor %}
+</div>
+
+{% endblock main %}

@@ -13,60 +13,13 @@
 {% endif %} 
 </h2>
 
-<table>
-    <thred>
-        {% if session.get('user_name') %}
-        <th>
-            Update
-        </th>
-        {% endif %}
-        <th width="100">
-            Image
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Type
-        </th>
-        <th>
-            Breed
-        </th>
-        <th>
-            Sex
-        </th>
-        <th>
-            Size
-        </th>
-        <th>
-            Colour
-        </th>
-        <th>
-            Age
-        </th>
-    </thred>
+<div class = "gallery">
+    {% for item in pet_list %}
+        <a href="/pet_details?id={{ item.id }}">
+            <img src="{{ item.image_url }}" alt={{item.name}} data-text="{{ item.name }}" >
+            <p class="tag">{{ item.name }}</p>
+        </a>
+    {% endfor %}
+</div>
 
-    <tbody>
-        {% for item in pet_list %}
-            <tr>
-                {% if session.get('user_name') %}
-                <td>
-                    <button> <a href="/edit_pet?id={{ item.id }}"> Edit </a> </button> </br></br>
-                    <button> <a href="/delete_pet?id={{ item.id }}"> Del </a> </button>
-                </td>
-                {% endif %}
-                <td>
-                    <img style="height: 180px" src="{{ item.image_url }}" alt={{item.name}}>
-                </td>
-                <td>{{ item.name }}</td>
-                <td>{{ item.type }}</td>
-                <td>{{ item.breed }}</td>
-                <td>{{ item.sex }}</td>
-                <td>{{ item.size }}</td>
-                <td>{{ item.colour }}</td>
-                <td>{{ item.age }}</td>
-            </tr>
-        {% endfor %}
-    </tbody>
-</table>
 {% endblock main %}

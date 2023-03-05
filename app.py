@@ -18,6 +18,12 @@ def index():
 def add_pet():
     return render_template("new_pet.html", user_name = session.get('user_name', 'UNKNOWN'))
 
+@app.route('/pet_details')
+def details_pet():
+    id = request.args.get('id')
+    pet_details = get_pet(id)
+    return render_template("pet_details.html", id=id, pet_details=pet_details, user_name = session.get('user_name', 'UNKNOWN'))
+
 @app.post('/pet_list')
 def create_new_pet():
     insert_pet(

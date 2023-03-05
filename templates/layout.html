@@ -8,9 +8,24 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <header>
+    <nav>
+        <a href="/">Home</a>
+        <a href="/contact">Contact Us</a>
+        {% if session.get('user_name') and session.get('user_status') %}
+        <a href="/user_list">User List</a>
+        {% endif %}
+
+    </nav>
+
+    <div class="header">
         <h1>Adopt Me</h1>
-            <form action="/logout" method="post">              
+        <span class="head">ADOPT ME</span>  </br>
+        <span class="sub-head">
+            Life is better with paws! Adopt a pet and add some extra love, laughter, and cuddles to your life.
+            Give a homeless animal a chance and find your new best friend today!       
+        </span> 
+
+        <form action="/logout" method="post">                     
             {% if session.get('user_name') %}
             <span>Logged in as: {{user_name}}</span>
             <button type="submit">Logout</button> 
@@ -24,14 +39,11 @@
                 {%endblock signup%} 
             {% endif %}
         </form>
-    </header> 
-    <nav>
-        <a href="/">Home</a>
-        <a href="/contact">Contact Us</a>
-        {% if session.get('user_name') and session.get('user_status') %}
-        <a href="/user_list">User List</a>
-        {% endif %}
-    </nav>
+            
+    </div> 
+
+
+
     <main>
         {% block main %} {% endblock main %}
     </main>  
