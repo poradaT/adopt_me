@@ -6,12 +6,24 @@
 
 {% block main %}
 
-<p>
-<h2>Our Mates
+<div class="text_above_sort">
+<h2>Our Mates</h2>
 {% if session.get('user_name') %}
 <button><a href="/create">Add new pet</a></button>       
 {% endif %} 
-</h2>
+</div>
+
+<div class="sort-bar">
+    <form method="get">
+    <label for="sort_by" class="sort">Narrow down your options sorting by animal type:</label>
+      <select name="type" onchange="this.form.submit()">
+        <option value="">Select an option</option>
+        <option value="dog" {% if type == 'dog' %}selected{% endif %}>dogs</option>
+        <option value="cat" {% if type == 'cat' %}selected{% endif %}>cats</option>
+        <option value="all" {% if type == 'all' %}selected{% endif %}>all type</option>
+      </select>
+    </form>
+</div>
 
 <div class = "gallery">
     {% for item in pet_list %}

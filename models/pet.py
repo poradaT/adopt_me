@@ -1,7 +1,14 @@
 from db import sql_select, sql_write, sql_select_one
 
-def get_all_pets():
-    pet_items = sql_select('SELECT id, image_url, name, type, breed, sex, size, colour, age FROM pet_list;')   
+def get_all_pets(sort_by):
+    if sort_by == 'dog':
+        pet_items = sql_select("SELECT id, image_url, name, type, breed, sex, size, colour, age FROM pet_list WHERE type='dog';") 
+    elif sort_by == 'cat':
+        pet_items = sql_select("SELECT id, image_url, name, type, breed, sex, size, colour, age FROM pet_list WHERE type='cat';") 
+    elif sort_by == 'all' :
+        pet_items = sql_select('SELECT id, image_url, name, type, breed, sex, size, colour, age FROM pet_list;')
+    else :
+        pet_items = sql_select('SELECT id, image_url, name, type, breed, sex, size, colour, age FROM pet_list;')   
     return pet_items
   
 def insert_pet(image_url, name, type, breed, sex, size, colour, age):

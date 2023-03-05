@@ -11,8 +11,9 @@ if __name__ == "__main__":
 
 @app.route('/')
 def index():
-    pet_list = get_all_pets()
-    return render_template('pet.html', pet_list=pet_list, user_name = session.get('user_name', 'UNKNOWN'), user_status = session.get('user_status'))
+    sort_by = request.args.get('type')
+    pet_list = get_all_pets(sort_by)
+    return render_template('pet.html', pet_list=pet_list, type=sort_by, user_name = session.get('user_name', 'UNKNOWN'), user_status = session.get('user_status'))
 
 @app.route('/create')
 def add_pet():
