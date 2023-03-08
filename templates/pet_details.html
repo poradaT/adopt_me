@@ -8,7 +8,7 @@
 
 {% for item in pet_details %} 
 <h2>{{ item.name }}
-{% if session.get('user_name') %}
+{% if session.get('user_name') and session.get('user_status') %}
     <button><a href="/edit_pet?id={{ item.id }}">Edit</a></button>
     <button><a href="/delete_pet?id={{ item.id }}">Delete</a></button>    
 {% endif %}
@@ -67,9 +67,19 @@
     </a>
 </div>
 
-{% if session.get('user_name') %}
-<h2><button style="font-size:large">Adopt {{ item.name }}</button></h2> 
+
+{% if session.get('user_name') and not item.adopted %}
+    <h2><button style="font-size:large"><a href="/adopt?id={{ item.id }}&user={{ user_id }}">Adopt {{ item.name }}</a></button></h2> 
+
+{% elif session.get('user_name') and item.adopted %}
+    <div class="adopted_msg">
+    Unfortunately, {{ item.name }} is currently in the process of being adopted. </br>
+    Take a look and find another furry friend who may be a perfect fit for you and your family.
+    </div>
 {% endif %}
+    
+
+
 
 {% endfor %}
 

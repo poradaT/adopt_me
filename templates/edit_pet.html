@@ -6,19 +6,19 @@
 
 {% block main %}
 <h2>Edit Pet</h2>
-<form action="/edit_pet" method="post">
+<form action="/edit_pet" method="post" style="margin: 1rem;">
 
     <input type="hidden" name="id" value="{{ id }}">
     {% for item in item_prefilled %}  
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Image URL</label> <br>
         <textarea name="image_url" type="text" row="4" cols="50" type="text">{{ item.image_url }}</textarea>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Name:</label>
         <input name="name" type="text" value="{{ item.name }}"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label for="type" class="sort">Type:</label>
         <select name="type">
         <option value="{{ item.type }}">Select an option</option>
@@ -26,25 +26,32 @@
         <option value="cat">Cat</option>
         </select>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Breed:</label>
         <input name="breed" type="text" value="{{ item.breed }}"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Sex:</label>
         <input name="sex" type="text" value="{{ item.sex }}"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>size:</label>
         <input name="size" type="text" value="{{ item.size }}"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Colour:</label>
         <input name="colour" type="text" value="{{ item.colour }}"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Age:</label>
         <input name="age" type="text" value="{{ item.age }}"></input>
+    </p>
+    <p style="margin-bottom: 5px;">
+        <label for="adopted" class="status">Adoption status:</label>
+        <select name="adopted">
+        <option value="false" type="boolean"> Available </option>
+        <option value="true" type="boolean"> Adopted </option>
+        </select>
     </p>
     {% endfor %}
     <button type="submit"> Update Pet</button>

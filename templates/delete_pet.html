@@ -8,7 +8,7 @@
 {% for item in item_details %}
     <h2> Are you sure you want to delete "{{ item.name }}" ?</h2>
     {% endfor %}
-<form action="/delete_pet" method="post">
+<form action="/delete_pet" method="post" style="margin: 1rem;">
     <input type="hidden" name="id" value="{{ id }}">
     <button type = "submit"> Delete </button>
 </form>

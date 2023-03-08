@@ -8,7 +8,7 @@
 
 <div class="text_above_sort">
 <h2>Our Mates</h2>
-{% if session.get('user_name') %}
+{% if session.get('user_name') and session.get('user_status') %}
 <button><a href="/create">Add new pet</a></button>       
 {% endif %} 
 </div>

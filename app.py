@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, redirect, session, flash
-from models.pet import get_all_pets, insert_pet, get_pet, update_pet, delete_pet
+from models.pet import get_all_pets, insert_pet, get_pet, update_pet, delete_pet, adopted
 from models.user import get_user, insert_user, get_all_users, update_user, delete_user
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -11,9 +11,10 @@ if __name__ == "__main__":
 
 @app.route('/')
 def index():
+    route = '/'
     sort_by = request.args.get('type')
     pet_list = get_all_pets(sort_by)
-    return render_template('pet.html', pet_list=pet_list, type=sort_by, user_name = session.get('user_name', 'UNKNOWN'), user_status = session.get('user_status'))
+    return render_template('pet.html', route=route, pet_list=pet_list, type=sort_by, user_name = session.get('user_name', 'UNKNOWN'), user_status = session.get('user_status'))
 
 @app.route('/create')
 def add_pet():
@@ -23,7 +24,7 @@ def add_pet():
 def details_pet():
     id = request.args.get('id')
     pet_details = get_pet(id)
-    return render_template("pet_details.html", id=id, pet_details=pet_details, user_name = session.get('user_name', 'UNKNOWN'))
+    return render_template("pet_details.html", id=id, pet_details=pet_details, user_name = session.get('user_name', 'UNKNOWN'), user_id = session.get('user_id'))
 
 @app.post('/pet_list')
 def create_new_pet():
@@ -35,7 +36,8 @@ def create_new_pet():
         request.form['sex'],
         request.form['size'],
         request.form['colour'],
-        request.form['age']      
+        request.form['age'],
+        request.form['adopted']     
     )
     return redirect('/')
 
@@ -56,7 +58,8 @@ def edit_pet():
         request.form['sex'],
         request.form['size'],
         request.form['colour'],
-        request.form['age'] 
+        request.form['age'],
+        request.form['adopted']   
     )
     return redirect('/')
 
@@ -70,6 +73,21 @@ def del_pet():
     id = request.form['id']
     delete_pet(id)
     return redirect('/')
+
+@app.route('/adopt', methods = ['GET', 'POST'])
+def adopt_pet():
+    if request.method == 'GET':
+        id = request.args.get('id')
+        #user = request.args.get('user')
+        pet_details = get_pet(id)    
+        return render_template("adopt.html", id=id, pet_details=pet_details, user_name = session.get('user_name', 'UNKNOWN'), user_id = session.get('user_id'))
+
+    id = request.form['id']
+    #user = request.form['user_id']
+    adopted(id)
+    pet_details = get_pet(id)
+    return render_template("pet_details.html", id=id, pet_details=pet_details, user_name = session.get('user_name', 'UNKNOWN'))
+
 
 #######################################################################
 

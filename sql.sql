@@ -12,6 +12,8 @@ CREATE TABLE pet_list (
     age TEXT    
 );
 
+ALTER TABLE pet_list ADD COLUMN adopted boolean DEFAULT false;
+
 INSERT INTO pet_list(image_url, name, type, breed, sex, size, colour, age)
 VALUES (
 'https://www.adoptapet.com.au/img/animals/7451439.jpeg', 
@@ -23,8 +25,6 @@ VALUES (
 'Brindle/White',
 '1 year and 5 months'
 );
-
-
 
 
 DROP TABLE IF EXISTS users;

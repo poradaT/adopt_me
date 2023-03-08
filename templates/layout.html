@@ -35,7 +35,7 @@
             {% endif %}
         </form>
 
-        <span class="head">A perfect match</span>  </br>
+        <span class="head">A pawfect match</span>  </br>
         
         <span class="sub-head">
             Life is better with paws! </br> Adopt a pet and add some extra love, laughter, and cuddles to your life.
@@ -48,9 +48,14 @@
         {% block main %} {% endblock main %}
     </main> 
 
+    <div style="margin: 1rem;">
+    {% if route == '/' %}
+    <a href="/"> ⬆ Back to top </a>
+    {% else %}
     </br>
-    <a href="/"> ◀◀◀◀ Back to home page </a> 
-    </br></br>
+    <a href="/"> ⬅ Back to home page </a> 
+    {% endif %}
+    </div>
 
 </body>
 </html>

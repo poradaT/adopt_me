@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Adopt A Pet
+{% endblock title%}
+
+{% block main %}  
+
+    <h2> Thank you, {{ user_name }}!</h2>
+{% for item in pet_details %}
+<div class="confirm_msg">
+    <p>
+        Congratulations on your decision to adopt "{{ item.name }}"!</br>
+        Once you click the "confirm" button below, </br>
+        you will receive an email from us soon with the next steps in the adoption process.</br>
+        Please note that {{ item.name }}'s adoption status will be updated on our website during this process.
+    
+    </br></br>
+    <img style="height: 300px" src="{{ item.image_url }}" alt="{{ item.name }}">
+    </p>
+{% endfor %}
+
+<form action="/adopt" method="post">
+    <input type="hidden" name="id" value="{{ id }}">
+    <input type="hidden" name="user" value="{{ user_id }}">
+    <button type = "submit" style="font-size:large"> Confirm </button>
+</form>
+</div>
+
+{% endblock main %}

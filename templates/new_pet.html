@@ -6,16 +6,17 @@
 
 {% block main %}
 <h2>Create New Pet</h2>
-<form action="/pet_list" method="post">
-    <p>
-        <label>Image URL</label> <br>
+
+<form action="/pet_list" method="post" style="margin: 1rem;">
+    <p style="margin-bottom: 5px;">
+        <label>Image URL</label> <br> 
         <textarea name="image_url" type="text" row="4" cols="50" type="text"></textarea>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Name:</label>
         <input name="name" type="text"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label for="type" class="sort">Type:</label>
         <select name="type">
         <option value="">Select an option</option>
@@ -23,25 +24,33 @@
         <option value="cat">Cat</option>
         </select>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Breed:</label>
         <input name="breed" type="text"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Sex:</label>
         <input name="sex" type="text"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>size:</label>
         <input name="size" type="text"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Colour:</label>
         <input name="colour" type="text"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Age:</label>
         <input name="age" type="text"></input>
+    </p>
+
+    <p style="margin-bottom: 5px;">
+        <label for="adopted" class="status">Adoption status:</label>
+        <select name="adopted">
+        <option value="false" type="boolean"> Available </option>
+        <option value="true" type="boolean"> Adopted </option>
+        </select>
     </p>
 
     <button type="submit"> Create Pet</button>

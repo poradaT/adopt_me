@@ -8,27 +8,27 @@
 <h2>Add New User</h2>
 
 {% with messages = get_flashed_messages() %}
-<p style="font-weight: bold;">{{ messages[0] }}</p>
+<p style="font-weight: bold; margin: 1rem;">{{ messages[0] }}</p>
 {% endwith %}
 
-<form action="/user_list" method="post">
-    <p>
+<form action="/user_list" method="post" style="margin: 1rem;">
+    <p style="margin-bottom: 5px;">
         <label>Name:</label>
         <input name="name" type="text"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Email:</label>
         <input name="email" type="text"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label>Password</label> </br>
         <input name="password" type="password"></input>
     </p>
-    <p>
+    <p style="margin-bottom: 5px;">
         <label for="confirm_password">Confirm your password</label> </br>
         <input name="confirm_password" type="password"></input>
     </p>
-
+    <br>
     <button type="submit"> Add User</button>
 </form>
 
